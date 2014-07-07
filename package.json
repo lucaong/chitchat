@@ -1,6 +1,6 @@
 {
   "name": "chitchat-lang",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "An educational object oriented language",
   "repository": "git@github.com:lucaong/chitchat.git",
   "main": "lib/chitchat.js",
