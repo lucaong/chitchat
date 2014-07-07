@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var chitchat = require('../lib/chitchat')
 var scope    = { being: function() {} }
 
