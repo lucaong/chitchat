@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <title>Try ChitChat!</title>
+    <style type="text/css">
+      body {
+        font-family: Verdana, sans-serif;
+        background: YellowGreen;
+        color: #334;
+      }
+      .container {
+        width: 90%;
+        margin: 15px auto;
+        border-radius: 5px;
+        padding: 15px;
+        background: #def;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      #log pre {
+        overflow: hidden;
+        clear: both;
+        font-size: 15px;
+        white-space: pre-wrap;
+        margin: 0;
+        padding: 10px;
+      }
+      #log pre:nth-child(2n) {
+        background: #cde;
+      }
+      #log .code, #log .output {
+        display: block;
+        float: left;
+      }
+      #log .code {
+        width: 80%;
+      }
+      #log .output {
+        width: 20%;
+        text-align: right;
+        color: #393;
+      }
+      #repl input {
+        display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      }
+      .error { color: red }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Try ChitChat</h1>
+      <form id="repl">
+        <div id="log">
+        </div>
+        <input type="text" size="200" placeholder="Type code here and press 'enter'">
+        <p class="error"></p>
+      </form>
+    </div>
+    <script src="jquery.min.js"></script>
+    <script src="chitchat.js"></script>
+    <script type="text/javascript">
+      var scope  = { being: function() {} },
+          $repl  = $('#repl'),
+          $input = $repl.find('input'),
+          $log   = $('#log'),
+          $error = $('.error')
+      $repl.on('submit', function( event ) {
+        event.preventDefault()
+        var code  = $input.val()
+        try {
+          var value = chitchat.eval( code, scope )
+          $log.append('<pre><span class="code">' + code + '</span><span class="output">' + value + '</span></pre>')
+          $input.val('')
+          $error.text('')
+        } catch (error) {
+          $error.text( error )
+          throw error
+        }
+      })
+      $input.focus()
+    </script>
+  </body>
+</html>
