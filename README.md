@@ -11,7 +11,7 @@ there is interest in the project.
 
 ## Installation
 
-`npm -g install chitchat`
+`npm -g install chitchat-lang`
 
 
 ## How does it look like:
@@ -28,7 +28,7 @@ Tandoori is a cat
 tell Tandoori "get off the sofa!"
 ```
 
-Running this program should return "meow :)"
+Running this program should return `"meow :)"`
 
 Another slightly more complex example:
 
@@ -44,7 +44,7 @@ Jim's age is 7
 tell Jim "how old will you be in x years?" given x: 3
 ```
 
-This time the program should return 10
+This time the program should return `10`
 
 
 ## Getting started
@@ -59,6 +59,6 @@ There are currently three way to run a ChitChat program:
   3. Use it as an `npm` package:
 
      ```
-     var chitchat = require('chitchat')
+     var chitchat = require('chitchat-lang')
      chitchat.eval('sum is 1 + 2')
      ```
