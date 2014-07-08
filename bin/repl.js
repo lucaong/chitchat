@@ -1,27 +1,25 @@
 #!/usr/bin/env node
 
+var readline = require('readline')
+var read     = readline.createInterface( process.stdin, process.stdout )
+var prefix   = '> '
 var chitchat = require('../lib/chitchat')
 var scope    = { being: function() {} }
 
-process.stdin.resume();
-process.stdin.setEncoding('utf8');
-
-process.stdout.write('Welcome to ChitChat REPL!\n')
-process.stdout.write('> ')
-
-process.stdin.on('data', function ( input ) {
-  if ( input === 'quit\n')
-    done()
+read.on('line', function( input ) {
   try {
     console.log( chitchat.eval( input, scope ) )
   } catch ( error ) {
     console.log( 'error: ' + error )
   } finally {
-    process.stdout.write('> ')
+    read.setPrompt( prefix, prefix.length )
+    read.prompt()
   }
-});
-
-function done() {
+}).on('close', function() {
   console.log('See you soon :)')
-  process.exit()
-}
+  process.exit(0)
+})
+
+console.log('Welcome to ChitChat REPL!')
+read.setPrompt( prefix, prefix.length )
+read.prompt()
