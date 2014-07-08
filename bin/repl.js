@@ -8,7 +8,7 @@ var scope    = { being: function() {} }
 
 read.on('line', function( input ) {
   try {
-    console.log( chitchat.eval( input, scope ) )
+    console.log( "" + chitchat.eval( input, scope ) )
   } catch ( error ) {
     console.log( 'error: ' + error )
   } finally {
