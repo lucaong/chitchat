@@ -66,6 +66,7 @@ There are currently three way to run a ChitChat program:
 
 ## TODOs:
 
-  - [ ] More primitive types: Float, Boolean, Array
-  - [ ] Better comparison operator (maybe an `equals` keyword)
-  - [ ] `if` expression without an `else` clause
+  - [x] More primitive types: `Float`, `Boolean`, `Nothing`
+  - [x] Better comparison operator (maybe an `equals` keyword)
+  - [x] `if` expression without an `else` clause
+  - [ ] Support for arrays

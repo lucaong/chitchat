@@ -1,5 +1,6 @@
-var expect = require('chai').expect
-var cc     = require('../lib/chitchat')
+var expect  = require('chai').expect
+var cc      = require('../lib/chitchat')
+var runtime = require('../lib/runtime')
 
 describe('chitchat', function() {
   it('perform simple arithmetics', function() {
@@ -8,6 +9,23 @@ describe('chitchat', function() {
 
   it('respect parenthesis', function() {
     expect( cc.eval('(3 * (2 + 5) + 4) / 5') ).to.equal( 5 )
+  })
+
+  it('has string literals', function() {
+    expect( cc.eval('"meow :)"') ).to.equal('meow :)')
+  })
+
+  it('has boolean literals', function() {
+    expect( cc.eval('false') ).to.equal(false)
+    expect( cc.eval('true') ).to.equal(true)
+  })
+
+  it('has float literals', function() {
+    expect( cc.eval('1.6180') ).to.equal( 1.618 )
+  })
+
+  it('has `nothing` literal', function() {
+    expect( cc.eval('nothing') ).to.equal( runtime.AST.Nothing )
   })
 
   it('defines classes', function() {
@@ -50,9 +68,36 @@ describe('chitchat', function() {
     ).to.equal(5)
   })
 
+  it('compares stuff with `equals`', function() {
+    expect( cc.eval('2 + 3 equals 4') ).to.equal(false)
+    expect( cc.eval('2 + 3 equals 5') ).to.equal(true)
+    expect( cc.eval('2 + 3 == 4') ).to.equal(false)
+    expect( cc.eval('2 + 3 == 5') ).to.equal(true)
+  })
+
   it('provides if/then/else', function() {
     expect(
-      cc.eval('if 3 = 2 then "hi" else "ho"')
+      cc.eval('if 3 equals 2 then "hi" else "ho"')
     ).to.equal('ho')
+
+    expect(
+      cc.eval('if 2 equals 2 then "hi" else "ho"')
+    ).to.equal('hi')
+
+    expect(
+      cc.eval('if 3 equals 2 then { "hi" } else { "ho" }')
+    ).to.equal('ho')
+
+    expect(
+      cc.eval('if 2 equals 2 then { "hi" } else { "ho" }')
+    ).to.equal('hi')
+
+    expect(
+      cc.eval('if false then x is ":); x"')
+    ).to.equal( runtime.AST.Nothing )
+
+    expect(
+      cc.eval('if true then x is ":)"; x')
+    ).to.equal(':)')
   })
 })

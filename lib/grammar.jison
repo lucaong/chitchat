@@ -3,7 +3,7 @@
 %left ','
 %left '||'
 %left '&&'
-%left '=' '!='
+%left '==' '!='
 %left '>' '<' '>=' '<='
 %left '+' '-'
 %left '*' '/'
@@ -48,7 +48,10 @@ Terminator
 
 Literal
   : INTEGER  { $$ = new yy.AST.Integer( yytext ) }
+  | FLOAT    { $$ = new yy.AST.Float( yytext ) }
   | STRING   { $$ = new yy.AST.String( yytext ) }
+  | BOOLEAN  { $$ = new yy.AST.Boolean( yytext ) }
+  | NOTHING  { $$ = yy.AST.Nothing }
   ;
 
 MethodCall
@@ -73,7 +76,7 @@ Arg
 Operator
   : Expression '||' Expression  { $$ = new yy.AST.Operator( $1, $2, $3 ) }
   | Expression '&&' Expression  { $$ = new yy.AST.Operator( $1, $2, $3 ) }
-  | Expression '='  Expression  { $$ = new yy.AST.Operator( $1, $2, $3 ) }
+  | Expression '==' Expression  { $$ = new yy.AST.Operator( $1, '==', $3 ) }
   | Expression '!=' Expression  { $$ = new yy.AST.Operator( $1, $2, $3 ) }
   | Expression '>'  Expression  { $$ = new yy.AST.Operator( $1, $2, $3 ) }
   | Expression '>=' Expression  { $$ = new yy.AST.Operator( $1, $2, $3 ) }
@@ -140,8 +143,12 @@ NewObject
   ;
 
 If
-  : IF Expression THEN Block ELSE Block            { $$ = new yy.AST.If( $2, $4, $6 ) }
+  : IF Expression THEN Block ELSE Block
+    { $$ = new yy.AST.If( $2, new yy.AST.Expressions( $4 ), new yy.AST.Expressions( $6 ) ) }
+  | IF Expression THEN Block
+    { $$ = new yy.AST.If( $2, new yy.AST.Expressions( $4 ) ) }
   | IF Expression THEN Expression ELSE Expression  { $$ = new yy.AST.If( $2, $4, $6 ) }
+  | IF Expression THEN Expression                  { $$ = new yy.AST.If( $2, $4 ) }
   ;
 
 Return
