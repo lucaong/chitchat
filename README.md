@@ -62,3 +62,10 @@ There are currently three way to run a ChitChat program:
      var chitchat = require('chitchat-lang')
      chitchat.eval('sum is 1 + 2')
      ```
+
+
+## TODOs:
+
+  - [ ] More primitive types: Float, Boolean, Array
+  - [ ] Better comparison operator (maybe an `equals` keyword)
+  - [ ] `if` expression without an `else` clause
