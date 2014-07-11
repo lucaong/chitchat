@@ -3,7 +3,7 @@
 *ChitChat* is a toy language designed to explain basic object oriented
 programming concepts to absolute beginners.
 
-NOTE: ChitChat is now still mainly an experiment. If you want to give it a try
+NOTE: _ChitChat_ is now still mainly an experiment. If you want to give it a try
 is should not eat your laundry, but it might be buggy and generally not always
 behaving as it is supposed to. I will try to make it better and well behaved if
 there is interest in the project.
@@ -16,7 +16,7 @@ there is interest in the project.
 
 ## How does it look like:
 
-This is a valid ChitChat program:
+This is a valid _ChitChat_ program:
 
 ```
 a cat is a kind of being
@@ -46,6 +46,7 @@ tell Jim "how old will you be in x years?" given x: 3
 
 This time the program should return `10`
 
+For a more complete overview, read the [Introduction to the _ChitChat_ language](https://github.com/lucaong/chitchat/wiki)
 
 ## Getting started
 
